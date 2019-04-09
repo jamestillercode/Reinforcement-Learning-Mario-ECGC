@@ -24,7 +24,7 @@ INPUT_SHAPE = (240, 256)
 WINDOW_LENGTH = 4
 
 
-class AtariProcessor(Processor):
+class NesProcessor(Processor):
     def process_observation(self, observation):
         assert observation.ndim == 3  # (height, width, channel)
         img = Image.fromarray(observation)
@@ -83,7 +83,7 @@ print(model.summary())
 # Finally, we configure and compile our agent. You can use every built-in Keras optimizer and
 # even the metrics!
 memory = SequentialMemory(limit=1000000, window_length=WINDOW_LENGTH)
-processor = AtariProcessor()
+processor = NesProcessor()
 
 # Select a policy. We use eps-greedy action selection, which means that a random action is selected
 # with probability eps. We anneal eps from 1.0 to 0.1 over the course of 1M steps. This is done so that
